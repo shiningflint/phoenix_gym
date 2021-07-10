@@ -1,4 +1,5 @@
 defmodule GymWeb.Router do
+  require Logger
   use GymWeb, :router
 
   pipeline :browser do
@@ -16,7 +17,7 @@ defmodule GymWeb.Router do
   scope "/", GymWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", UserController, :index
     resources "/users", UserController
     resources "/sessions", SessionController, only: [ :new, :create, :delete ], singleton: true
   end
@@ -27,14 +28,22 @@ defmodule GymWeb.Router do
     resources "/pages", PageController
   end
 
+  scope "/admin", GymWeb.Admin, as: :admin do
+    pipe_through [:browser, :authenticate_user]
+
+    get "/", HomeController, :index
+  end
+
   defp authenticate_user(conn, _) do
     case get_session(conn, :user_id) do
       nil ->
+        Logger.info "nil session"
         conn
         |> Phoenix.Controller.put_flash(:error, "Login required")
         |> Phoenix.Controller.redirect(to: "/")
         |> halt()
       user_id ->
+        Logger.info "Found user id: "
         assign(conn, :current_user, Gym.Accounts.get_user!(user_id))
     end
   end
