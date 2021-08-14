@@ -1,4 +1,4 @@
-defmodule GymWeb.Admin.HomeController do
+defmodule GymWeb.Admin.UserController do
   use GymWeb, :controller
 
   plug :put_layout, "admin.html"

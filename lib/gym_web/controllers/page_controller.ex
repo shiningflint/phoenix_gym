@@ -1,6 +1,8 @@
 defmodule GymWeb.PageController do
   use GymWeb, :controller
 
+  alias Gym.CMS
+
   plug :require_existing_author
   plug :authorize_page when action in [:edit, :update, :delete]
 

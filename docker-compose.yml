@@ -7,3 +7,11 @@ services:
       - "4000:4000"
     volumes:
       - .:/app
+    command: ash -c "
+      cd assets
+      && npm install
+      && node node_modules/webpack/bin/webpack.js --mode development
+      && cd ..
+      && mix phx.server
+      "
+

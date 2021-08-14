@@ -24,5 +24,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: Routes.page_path(@conn, :edit, @page) %></span>
-<span><%= link "Back", to: Routes.page_path(@conn, :index) %></span>
+<span><%= link "Edit", to: Routes.cms_page_path(@conn, :edit, @page) %></span>
+<%# <span><%= link "Back", to: Routes.page_path(@conn, :index) %1></span> %>

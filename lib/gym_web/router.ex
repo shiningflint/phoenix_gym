@@ -32,6 +32,7 @@ defmodule GymWeb.Router do
     pipe_through [:browser, :authenticate_user]
 
     get "/", HomeController, :index
+    resources "/users", UserController, only: [ :index ]
   end
 
   defp authenticate_user(conn, _) do

@@ -1,7 +1,7 @@
 FROM elixir:1.12.2-alpine AS build
 
 # install build dependencies
-RUN apk add --update --no-cache build-base npm git curl py-pip
+RUN apk add --update --no-cache build-base npm git curl py-pip inotify-tools
 
 # prepare build dir
 WORKDIR /app
